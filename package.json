@@ -1,0 +1,24 @@
+{
+  "name": "scrapely",
+  "version": "0.1.1",
+  "description": "A webscraper",
+  "main": "scrapely.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulwardrip/scrapely.git"
+  },
+  "keywords": [
+    "web",
+    "scraper",
+    "html",
+    "cheerio"
+  ],
+  "author": "Paul Wardrip <pwardrip@gmail.com>",
+  "license": "ISC",
+  "homepage": "https://github.com/paulwardrip/scrapely",
+  "dependencies": {
+    "cheerio": "latest",
+    "jsdom": "latest",
+    "request": "latest"
+  }
+}
