@@ -1,0 +1,24 @@
+{
+  "name": "scrapely",
+  "description": "A webscraper",
+  "main": "scrapely.js",
+  "authors": [
+    "Paul Wardrip <pwardrip@gmail.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "web",
+    "scraper",
+    "html",
+    "jquery",
+    "cheerio"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

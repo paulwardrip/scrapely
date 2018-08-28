@@ -36,22 +36,25 @@ const scrapely = (()=>{
         });
     }
 
-    let instance = {
+    let __document= (url, cb)=> {
+        getly(url, (e, o) => {
+            if (e) {
+                cb(e);
+            } else {
+                cb (null, cheerio.load(o, parser_args));
+            }
+        });
+    };
+
+
+        let instance = {
         raw:  (url, cb)=> {
             getly(url, (e, o) => {
                 cb(e,o);
             })
         },
 
-        document:  (url, cb)=> {
-            getly(url, (e, o) => {
-                if (e) {
-                    cb(e);
-                } else {
-                    cb (null, cheerio.load(o, parser_args));
-                }
-            });
-        },
+            document: __document,
 
         scripts: (url, cb) => {
             getly(url, (e, o) => {
@@ -92,6 +95,29 @@ const scrapely = (()=>{
                     cb(null, filename);
                 }
             });
+        },
+
+        repackage: (wrapper, call)=>{
+            __document(wrapper.url, (err,$)=>{
+                if (err) {
+                    call(err);
+                }
+
+                let thismess = [];
+                let $list = $(wrapper.collection);
+                for (let n = 0; n < $list.length; n++) {
+                    var frankenjson = {};
+                    for (var kp in wrapper.json) {
+                        if (wrapper.json.hasOwnProperty(kp) && typeof wrapper.json[kp] === 'string') {
+                            frankenjson[kp] = $(wrapper.json[kp], $list[n]).text();
+                        }
+                    }
+                    thismess.push(frankenjson);
+                }
+
+                call (null,thismess);
+
+            })
         }
     };
 
