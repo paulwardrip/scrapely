@@ -1,11 +1,16 @@
 {
   "name": "scrapely",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "description": "A webscraper",
-  "main": "scrapely.js",
+  "main": "core/v2/scrapely.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/paulwardrip/scrapely.git"
+  },
+  "scripts": {
+    "serve": "node interactive/server.js",
+    "less": "lessc -o interactive/client/source/_.css interactive/client/source/client.less",
+    "dist": "browserify core/v2/scrapely.js -o dist/scrapely.web.js -t [ babelify --presets [ @babel/preset-env ] ] "
   },
   "keywords": [
     "web",
@@ -17,8 +22,21 @@
   "license": "ISC",
   "homepage": "https://github.com/paulwardrip/scrapely",
   "dependencies": {
-    "cheerio": "latest",
-    "jsdom": "latest",
-    "request": "latest"
+    "bootstrap": "^4.5.2",
+    "cheerio": "^1.0.0-rc.3",
+    "jsdom": "^15.2.1"
+  },
+  "devDependencies": {
+    "request": "^2.88.2",
+    "unirest": "^0.6.0",
+    "less": "^3.12.2",
+    "express": "^4.17.1",
+    "express-static": "^1.2.6",
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   }
 }

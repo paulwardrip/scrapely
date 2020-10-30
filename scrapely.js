@@ -1,5 +1,8 @@
 "use strict";
 
+/*
+
+ */
 const scrapely = (()=>{
 
     const JSDOM = require('jsdom').JSDOM;
@@ -36,6 +39,12 @@ const scrapely = (()=>{
         });
     }
 
+
+    /**
+     * Get an html document wrapped to support jQuery-like traversal provided by cheerio.
+     * @param url
+     * @param cb
+     */
     let __document= (url, cb)=> {
         getly(url, (e, o) => {
             if (e) {
@@ -44,18 +53,33 @@ const scrapely = (()=>{
                 cb (null, cheerio.load(o, parser_args));
             }
         });
+
+        global.$ = cheerio;
     };
 
 
-        let instance = {
+    let instance = {
+        /**
+         * Get raw text response from a URL.
+         * @param url
+         * @param cb
+         */
         raw:  (url, cb)=> {
             getly(url, (e, o) => {
                 cb(e,o);
             })
         },
 
+
             document: __document,
 
+
+        /**
+         * Get an html document loaded by JSDOM, providing support to execute the scripts on the page...
+         * wrapped to support jQuery-like traversal provided by cheerio.
+         * @param url
+         * @param cb
+         */
         scripts: (url, cb) => {
             getly(url, (e, o) => {
                 if (e) {
@@ -67,6 +91,11 @@ const scrapely = (()=>{
             }) ;
         },
 
+        /**
+         * Call a web endpoint that returns JSON
+         * @param url
+         * @param cb
+         */
         json:  (url, cb)=> {
             getly(url, (e, o) => {
                 if (e) {
@@ -80,7 +109,13 @@ const scrapely = (()=>{
                 }
             });
         },
-        
+
+        /**
+         * Download the binary file at this URL.
+         * @param url
+         * @param filename
+         * @param cb
+         */
         download:  (url, filename, cb)=> {
             let file = fs.createWriteStream(filename);
 
@@ -97,6 +132,11 @@ const scrapely = (()=>{
             });
         },
 
+        /**
+         *
+         * @param wrapper
+         * @param call
+         */
         repackage: (wrapper, call)=>{
             __document(wrapper.url, (err,$)=>{
                 if (err) {
