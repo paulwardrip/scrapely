@@ -24,7 +24,7 @@
   "dependencies": {
     "bootstrap": "^4.5.2",
     "cheerio": "^1.0.0-rc.3",
-    "jsdom": "^15.2.1"
+    "jsdom": "^16.5.0"
   },
   "devDependencies": {
     "request": "^2.88.2",
